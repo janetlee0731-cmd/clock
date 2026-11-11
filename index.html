@@ -15,7 +15,6 @@
       --minute-hand: #575653;
       --second-hand: #e10600;
       --shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-      --date-text: #787774;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -28,7 +27,6 @@
         --minute-hand: #a8a7a4;
         --second-hand: #e10600;
         --shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
-        --date-text: #9b9a97;
       }
     }
 
@@ -58,7 +56,7 @@
       box-shadow: var(--shadow);
     }
 
-    /* 刻度產生容器 */
+    /* 刻度容器 */
     .dial-marks {
       position: absolute;
       width: 100%;
@@ -79,19 +77,6 @@
       width: 2.5px;
       height: 11px;
       background: var(--marker);
-    }
-
-    /* 日期顯示窗 */
-    .date-window {
-      position: absolute;
-      right: 32px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--date-text);
-      letter-spacing: 0.5px;
-      user-select: none;
     }
 
     /* 指針軸心與本體 */
@@ -172,7 +157,6 @@
 <body>
   <div class="clock-container">
     <div class="dial-marks" id="dial-marks"></div>
-    <div class="date-window" id="date-window">--</div>
 
     <div class="hand-container">
       <div class="hand hour" id="hour-hand"></div>
@@ -198,7 +182,6 @@
     const hourHand = document.getElementById('hour-hand');
     const minHand = document.getElementById('minute-hand');
     const secHand = document.getElementById('second-hand');
-    const dateWin = document.getElementById('date-window');
 
     function updateClock() {
       const now = new Date();
@@ -215,8 +198,6 @@
       secHand.style.transform = `rotate(${secDeg}deg)`;
       minHand.style.transform = `rotate(${minDeg}deg)`;
       hourHand.style.transform = `rotate(${hourDeg}deg)`;
-
-      dateWin.innerText = String(now.getDate()).padStart(2, '0');
 
       requestAnimationFrame(updateClock);
     }
